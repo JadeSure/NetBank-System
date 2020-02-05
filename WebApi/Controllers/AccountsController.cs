@@ -5,106 +5,56 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApi.Data;
 using WebApi.Models;
+using WebApi.Models.DataManager;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountsController : ControllerBase
+    public class AccountsController : Controller
     {
-        private readonly NwbaDbContext _context;
+        private readonly AccountManager _repo;
 
-        public AccountsController(NwbaDbContext context)
+        public AccountsController(AccountManager repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
-        // GET: api/Accounts
+        // GET: api/movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AccountAPI>>> GetAccounts()
+        public IEnumerable<AccountAPI> Get()
         {
-            return await _context.Accounts.ToListAsync();
+            return _repo.GetAll();
         }
 
-        // GET: api/Accounts/5
+        // GET api/movies/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<AccountAPI>> GetAccount(int id)
+        public AccountAPI Get(int id)
         {
-            var account = await _context.Accounts.FindAsync(id);
-
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            return account;
+            return _repo.Get(id);
         }
 
-        // PUT: api/Accounts/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount(int id, AccountAPI account)
-        {
-            if (id != account.AccountNumber)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(account).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AccountExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Accounts
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // POST api/movies
         [HttpPost]
-        public async Task<ActionResult<AccountAPI>> PostAccount(AccountAPI account)
+        public void Post([FromBody] AccountAPI account)
         {
-            _context.Accounts.Add(account);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAccount", new { id = account.AccountNumber }, account);
+            _repo.Add(account);
         }
 
-        // DELETE: api/Accounts/5
+        // PUT api/movies
+        [HttpPut]
+        public void Put([FromBody] AccountAPI account)
+        {
+            _repo.Update(account.AccountNumber, account);
+        }
+
+        // DELETE api/movies/1
         [HttpDelete("{id}")]
-        public async Task<ActionResult<AccountAPI>> DeleteAccount(int id)
+        public long Delete(int id)
         {
-            var account = await _context.Accounts.FindAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            _context.Accounts.Remove(account);
-            await _context.SaveChangesAsync();
-
-            return account;
+            return _repo.Delete(id);
         }
 
-        private bool AccountExists(int id)
-        {
-            return _context.Accounts.Any(e => e.AccountNumber == id);
-        }
     }
 }

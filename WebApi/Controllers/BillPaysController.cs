@@ -7,104 +7,55 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models;
+using WebApi.Models.DataManager;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BillPaysController : ControllerBase
+    public class BillPaysController : Controller
     {
-        private readonly NwbaDbContext _context;
+        private readonly BillPayManager _repo;
 
-        public BillPaysController(NwbaDbContext context)
+        public BillPaysController(BillPayManager repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: api/BillPays
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BillPayAPI>>> GetBillPays()
+        public IEnumerable<BillPayAPI> Get()
         {
-            return await _context.BillPays.ToListAsync();
+            return _repo.GetAll();
         }
 
-        // GET: api/BillPays/5
+        // GET api/BillPay/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<BillPayAPI>> GetBillPay(int id)
+        public BillPayAPI Get(int id)
         {
-            var billPay = await _context.BillPays.FindAsync(id);
-
-            if (billPay == null)
-            {
-                return NotFound();
-            }
-
-            return billPay;
+            return _repo.Get(id);
         }
 
-        // PUT: api/BillPays/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBillPay(int id, BillPayAPI billPay)
-        {
-            if (id != billPay.BillPayID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(billPay).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BillPayExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/BillPays
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // POST api/BillPay
         [HttpPost]
-        public async Task<ActionResult<BillPayAPI>> PostBillPay(BillPayAPI billPay)
+        public void Post([FromBody] BillPayAPI billPay)
         {
-            _context.BillPays.Add(billPay);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBillPay", new { id = billPay.BillPayID }, billPay);
+            _repo.Add(billPay);
         }
 
-        // DELETE: api/BillPays/5
+        // PUT api/billPay
+        [HttpPut]
+        public void Put([FromBody] BillPayAPI billPay)
+        {
+            _repo.Update(billPay.BillPayID, billPay);
+        }
+
+        // DELETE api/billPay/1
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BillPayAPI>> DeleteBillPay(int id)
+        public long Delete(int id)
         {
-            var billPay = await _context.BillPays.FindAsync(id);
-            if (billPay == null)
-            {
-                return NotFound();
-            }
-
-            _context.BillPays.Remove(billPay);
-            await _context.SaveChangesAsync();
-
-            return billPay;
+            return _repo.Delete(id);
         }
 
-        private bool BillPayExists(int id)
-        {
-            return _context.BillPays.Any(e => e.BillPayID == id);
-        }
     }
 }

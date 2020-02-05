@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
+using WebApi.Models.DataManager;
 
 namespace WebApi
 {
@@ -27,6 +28,13 @@ namespace WebApi
         {
             // for more shows in limited json file size (32 => 256)
             services.AddControllers().AddJsonOptions(option => { option.JsonSerializerOptions.PropertyNamingPolicy = null; option.JsonSerializerOptions.MaxDepth = 256; });
+
+            services.AddTransient<AccountManager>();
+            services.AddTransient<BillPayManager>();
+            services.AddTransient<CustomerManager>();
+            services.AddTransient<LoginManager>();
+            services.AddTransient<PayeeManager>();
+            services.AddTransient<TransactionManager>();
 
 
             services.AddDbContext<NwbaDbContext>(options =>

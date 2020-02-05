@@ -7,104 +7,55 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models;
+using WebApi.Models.DataManager;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PayeesController : ControllerBase
+    public class PayeesController : Controller
     {
-        private readonly NwbaDbContext _context;
+        private readonly PayeeManager _repo;
 
-        public PayeesController(NwbaDbContext context)
+        public PayeesController(PayeeManager repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: api/Payees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PayeeAPI>>> GetPayees()
+        public IEnumerable<PayeeAPI> Get()
         {
-            return await _context.Payees.ToListAsync();
+            return _repo.GetAll();
         }
 
-        // GET: api/Payees/5
+        // GET api/Payees/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<PayeeAPI>> GetPayee(int id)
+        public PayeeAPI Get(int id)
         {
-            var payee = await _context.Payees.FindAsync(id);
-
-            if (payee == null)
-            {
-                return NotFound();
-            }
-
-            return payee;
+            return _repo.Get(id);
         }
 
-        // PUT: api/Payees/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPayee(int id, PayeeAPI payee)
-        {
-            if (id != payee.PayeeID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(payee).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PayeeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Payees
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // POST api/Payees
         [HttpPost]
-        public async Task<ActionResult<PayeeAPI>> PostPayee(PayeeAPI payee)
+        public void Post([FromBody] PayeeAPI payee)
         {
-            _context.Payees.Add(payee);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPayee", new { id = payee.PayeeID }, payee);
+            _repo.Add(payee);
         }
 
-        // DELETE: api/Payees/5
+        // PUT api/Payees
+        [HttpPut]
+        public void Put([FromBody] PayeeAPI payee)
+        {
+            _repo.Update(payee.PayeeID, payee);
+        }
+
+        // DELETE api/Payees/1
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PayeeAPI>> DeletePayee(int id)
+        public long Delete(int id)
         {
-            var payee = await _context.Payees.FindAsync(id);
-            if (payee == null)
-            {
-                return NotFound();
-            }
-
-            _context.Payees.Remove(payee);
-            await _context.SaveChangesAsync();
-
-            return payee;
+            return _repo.Delete(id);
         }
 
-        private bool PayeeExists(int id)
-        {
-            return _context.Payees.Any(e => e.PayeeID == id);
-        }
     }
 }

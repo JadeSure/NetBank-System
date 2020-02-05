@@ -50,7 +50,7 @@ namespace WebApi.Data
 
 
             builder.Entity<AccountAPI>()
-                .HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
+                 .HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
 
             builder.Entity<TransactionAPI>()
                 .HasOne(x => x.Account)

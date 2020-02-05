@@ -7,118 +7,55 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models;
+using WebApi.Models.DataManager;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class CustomersController : Controller
     {
-        private readonly NwbaDbContext _context;
+        private readonly CustomerManager _repo;
 
-        public CustomersController(NwbaDbContext context)
+        public CustomersController(CustomerManager repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CustomerAPI>>> GetCustomers()
+        public IEnumerable<CustomerAPI> Get()
         {
-            return await _context.Customers.ToListAsync();
+            return _repo.GetAll();
         }
 
-        // GET: api/Customers/5
+        // GET api/Customers/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerAPI>> GetCustomer(int id)
+        public CustomerAPI Get(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return customer;
+            return _repo.Get(id);
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, CustomerAPI customer)
-        {
-            if (id != customer.CustomerID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(customer).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Customers
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // POST api/Customers
         [HttpPost]
-        public async Task<ActionResult<CustomerAPI>> PostCustomer(CustomerAPI customer)
+        public void Post([FromBody] CustomerAPI customer)
         {
-            _context.Customers.Add(customer);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CustomerExists(customer.CustomerID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetCustomer", new { id = customer.CustomerID }, customer);
+            _repo.Add(customer);
         }
 
-        // DELETE: api/Customers/5
+        // PUT api/Customers
+        [HttpPut]
+        public void Put([FromBody] CustomerAPI customer)
+        {
+            _repo.Update(customer.CustomerID, customer);
+        }
+
+        // DELETE api/Customers/1
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CustomerAPI>> DeleteCustomer(int id)
+        public long Delete(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
-
-            return customer;
+            return _repo.Delete(id);
         }
 
-        private bool CustomerExists(int id)
-        {
-            return _context.Customers.Any(e => e.CustomerID == id);
-        }
     }
 }

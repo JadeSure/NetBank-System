@@ -7,118 +7,55 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models;
+using WebApi.Models.DataManager;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginsController : ControllerBase
+    public class LoginsController : Controller
     {
-        private readonly NwbaDbContext _context;
+        private readonly LoginManager _repo;
 
-        public LoginsController(NwbaDbContext context)
+        public LoginsController(LoginManager repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: api/Logins
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LoginAPI>>> GetLogins()
+        public IEnumerable<LoginAPI> Get()
         {
-            return await _context.Logins.ToListAsync();
+            return _repo.GetAll();
         }
 
-        // GET: api/Logins/5
+        // GET api/Logins/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<LoginAPI>> GetLogin(int id)
+        public LoginAPI Get(int id)
         {
-            var login = await _context.Logins.FindAsync(id);
-
-            if (login == null)
-            {
-                return NotFound();
-            }
-
-            return login;
+            return _repo.Get(id);
         }
 
-        // PUT: api/Logins/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutLogin(int id, LoginAPI login)
-        {
-            if (id != login.CustomerID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(login).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LoginExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Logins
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        // POST api/Logins
         [HttpPost]
-        public async Task<ActionResult<LoginAPI>> PostLogin(LoginAPI login)
+        public void Post([FromBody] LoginAPI login)
         {
-            _context.Logins.Add(login);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (LoginExists(login.CustomerID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetLogin", new { id = login.CustomerID }, login);
+            _repo.Add(login);
         }
 
-        // DELETE: api/Logins/5
+        // PUT api/Customers
+        [HttpPut]
+        public void Put([FromBody] LoginAPI login)
+        {
+            _repo.Update(login.CustomerID, login);
+        }
+
+        // DELETE api/Customers/1
         [HttpDelete("{id}")]
-        public async Task<ActionResult<LoginAPI>> DeleteLogin(int id)
+        public long Delete(int id)
         {
-            var login = await _context.Logins.FindAsync(id);
-            if (login == null)
-            {
-                return NotFound();
-            }
-
-            _context.Logins.Remove(login);
-            await _context.SaveChangesAsync();
-
-            return login;
+            return _repo.Delete(id);
         }
 
-        private bool LoginExists(int id)
-        {
-            return _context.Logins.Any(e => e.CustomerID == id);
-        }
     }
 }

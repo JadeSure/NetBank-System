@@ -15,8 +15,8 @@ namespace WebApi.Data
 
             //Look for customers.
             // DB has already been seeded.
-            //if (context.Customers.Any())
-            //    return;
+            if (context.Customers.Any())
+                return;
 
             // set default data to database by data seed
             //context.Customers.AddRange(
@@ -121,7 +121,7 @@ namespace WebApi.Data
                 new TransactionAPI
                 {
                     TransactionType = TransactionType.D,
-                    AccountNumber = 1008,
+                    AccountNumber = 1012,
                     Amount = 100,
                     Comment = openingBalance,
                     ModifyDate = DateTime.ParseExact("19/12/2019 08:00:00 PM", format, null)
@@ -129,7 +129,7 @@ namespace WebApi.Data
                 new TransactionAPI
                 {
                     TransactionType = TransactionType.D,
-                    AccountNumber = 1009,
+                    AccountNumber = 1013,
                     Amount = 500,
                     Comment = openingBalance,
                     ModifyDate = DateTime.ParseExact("19/12/2019 08:30:00 PM", format, null)
@@ -137,7 +137,7 @@ namespace WebApi.Data
                 new TransactionAPI
                 {
                     TransactionType = TransactionType.D,
-                    AccountNumber = 1010,
+                    AccountNumber = 1014,
                     Amount = 500.95m,
                     Comment = openingBalance,
                     ModifyDate = DateTime.ParseExact("19/12/2019 09:00:00 PM", format, null)
@@ -145,7 +145,7 @@ namespace WebApi.Data
                 new TransactionAPI
                 {
                     TransactionType = TransactionType.D,
-                    AccountNumber = 1011,
+                    AccountNumber = 1015,
                     Amount = 1250.50m,
                     Comment = openingBalance,
                     ModifyDate = DateTime.ParseExact("19/12/2019 10:00:00 PM", format, null)

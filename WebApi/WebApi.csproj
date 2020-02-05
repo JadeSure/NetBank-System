@@ -21,11 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DataManager\" />
-    <Folder Include="Models\Repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\a2-s3736719-s3677615\a2-s3736719-s3677615.csproj" />
   </ItemGroup>
 
