@@ -14,8 +14,8 @@ namespace a2_s3736719_s3677615.Data
             using var context = new NwbaDbContext(serviceProvider.GetRequiredService<DbContextOptions<NwbaDbContext>>());
 
             //Look for customers.
-            if (context.Customers.Any())
-                return; // DB has already been seeded.
+            //if (context.Customers.Any())
+            //    return; // DB has already been seeded.
 
             // set default data to database by data seed
             //context.Customers.AddRange(
