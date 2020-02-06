@@ -30,8 +30,8 @@ namespace a2_s3736719_s3677615.Data
                 .Property(o => o.PayeeID)
                 .HasDefaultValueSql("NEXT VALUE FOR shared.PayeeSequence");
 
-            builder.Entity<Transaction>()
-                .HasKey(c => new { c.TransactionID, c.TransactionType });
+            //builder.Entity<Transaction>()
+            //    .HasKey(c => new { c.TransactionID, c.TransactionType });
 
             builder.Entity<Transaction>()
                .Property(o => o.TransactionID)
