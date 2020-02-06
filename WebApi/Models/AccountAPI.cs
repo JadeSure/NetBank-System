@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using a2_s3736719_s3677615.Utilities;
+using System.Text.Json.Serialization;
 
 namespace WebApi.Models
 {
@@ -53,6 +54,7 @@ namespace WebApi.Models
 
 
         //Navigational Property
+        [JsonIgnore]
         public virtual CustomerAPI Customer { get; set; }
         public virtual List<BillPayAPI> BillPays { get; set; }
         public virtual List<TransactionAPI> Transactions { get; set; }
