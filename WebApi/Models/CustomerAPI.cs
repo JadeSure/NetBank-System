@@ -60,7 +60,7 @@ namespace WebApi.Models
         [StringLength(15)]
         public string Phone { get; set; }
 
-        //public virtual List<Account> Accounts { get; set; }
+        public virtual List<AccountAPI> Accounts { get; set; }
 
         public CustomerAPI()
         {

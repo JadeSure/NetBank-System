@@ -28,7 +28,7 @@ namespace WebApi.Models
         [Required, StringLength(15)]
         public string Phone { get; set; }
 
-        //public virtual List<BillPay> BillPays { get; set; }
+        public virtual List<BillPayAPI> BillPays { get; set; }
 
         public PayeeAPI()
         {

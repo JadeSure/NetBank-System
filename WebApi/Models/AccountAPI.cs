@@ -1,7 +1,6 @@
 ﻿using WebApi.Utilities;
 using System;
 using System.Collections.Generic;
-
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using a2_s3736719_s3677615.Utilities;
@@ -54,8 +53,8 @@ namespace WebApi.Models
 
 
         //Navigational Property
-        // public virtual Customer Customer { get; set; }
-        //public virtual List<BillPay> BillPays { get; set; }
+        public virtual CustomerAPI Customer { get; set; }
+        public virtual List<BillPayAPI> BillPays { get; set; }
         public virtual List<TransactionAPI> Transactions { get; set; }
 
         

@@ -11,7 +11,7 @@ namespace WebApi.Models
     {
         [Key, ForeignKey("Customer")]
         public int CustomerID { get; set; }
-        //public virtual Customer Customer { get; set; }
+        public virtual CustomerAPI Customer { get; set; }
 
         // string length need to be 50
         [Required, StringLength(8)]

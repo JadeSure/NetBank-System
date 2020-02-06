@@ -64,7 +64,7 @@ namespace NwbaExample.Controllers
         }
 
         // customized routing
-        [Route("LogoutNow")]
+        [Route("/Nwba/LogoutNow")]
         public IActionResult Logout()
         {
             // Logout customer, clear the session

@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - a3_s3736719_s3677615</title>
+    <title>@ViewData["AdminTitle"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -17,13 +18,54 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <!--Customered navigation bars-->
+                    <!-- partial view -->
+                    <ul class="navbar-nav">
+                        @{
+                            var isLoggedIn = Context.Session.GetInt32(nameof(AdminLogin.AdminId)).HasValue;
+                        }
+                        @if (isLoggedIn)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-dark">
+                                    Welcome, Captain @Context.Session.GetString(nameof(AdminLogin.AdminName))
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
+                        <!--link back to the customer, mystatement-->
+                        @if (isLoggedIn)
+                        {
+                            <!--when user login the system, it will appear Transactions, Accounts, Scheduled pay and User Profile-->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="ATM" asp-action="MakeTransaction">Transactions</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Mystatement" asp-action="Index">Accounts</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="MyProfile" asp-action="Details">Scheduled pay</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="BillPays" asp-action="Index">User Profile</a>
+                            </li>
+                        }
+
+
                     </ul>
                 </div>
             </div>

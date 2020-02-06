@@ -46,8 +46,6 @@ namespace a2_s3736719_s3677615
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddControllersWithViews();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
