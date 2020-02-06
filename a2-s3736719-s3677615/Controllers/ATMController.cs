@@ -63,7 +63,6 @@ namespace a2_s3736719_s3677615.Controllers
                         transaction.Account.MakeTransfer(transaction.Amount, transaction.DestAccount, transaction.Comment);
                         break;
                     // if the input action is not belong to above, show error messages
-                    // won't happen actually
                     default:
                         ModelState.AddModelError(nameof(transaction.TransactionType), "Incorect transaction type");
                         break;

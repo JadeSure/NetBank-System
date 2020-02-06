@@ -45,5 +45,15 @@ namespace a2_s3736719_s3677615.Utilities
                    scheduelDate.Hour == rightNow.Hour &&
                    scheduelDate.Minute == rightNow.Minute;
         }
+
+        // user lock/unlock
+        public static bool PassOneMin(DateTime lockDate, DateTime rightNow)
+        {
+            return lockDate.Year == rightNow.Year &&
+                   lockDate.Month == rightNow.Month &&
+                   lockDate.Day == rightNow.Day &&
+                   lockDate.Hour == rightNow.Hour &&
+                   (rightNow.Minute - lockDate.Minute > 1);
+        }
     }
 }

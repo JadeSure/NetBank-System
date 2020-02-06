@@ -60,6 +60,9 @@ namespace a2_s3736719_s3677615.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("money");
 
+                    b.Property<int>("BillPayStatus")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
@@ -125,6 +128,12 @@ namespace a2_s3736719_s3677615.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<int>("AttemptCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LoginStatus")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
@@ -188,9 +197,6 @@ namespace a2_s3736719_s3677615.Migrations
                         .HasColumnType("int")
                         .HasDefaultValueSql("NEXT VALUE FOR shared.TransactionSequence");
 
-                    b.Property<int>("TransactionType")
-                        .HasColumnType("int");
-
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
 
@@ -207,7 +213,10 @@ namespace a2_s3736719_s3677615.Migrations
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("TransactionID", "TransactionType");
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("int");
+
+                    b.HasKey("TransactionID");
 
                     b.HasIndex("AccountNumber");
 

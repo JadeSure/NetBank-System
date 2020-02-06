@@ -18,6 +18,14 @@ namespace a2_s3736719_s3677615.Models
         S = 4
     }
 
+    public enum BillPayStatus
+    {
+        [Display(Name = "Ready")]
+        Ready = 1,
+        [Display(Name = "Blocked")]
+        Blocked = 2
+    }
+
 
     public class BillPay
     {
@@ -44,6 +52,8 @@ namespace a2_s3736719_s3677615.Models
 
         [Required, DataType(DataType.DateTime)]
         public DateTime ModifyDate { get; set; }
+
+        public BillPayStatus BillPayStatus { get; set; }
 
         public BillPay()
         {
