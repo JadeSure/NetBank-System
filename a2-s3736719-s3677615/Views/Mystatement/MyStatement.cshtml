@@ -1,0 +1,50 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@using Microsoft.AspNetCore.Http
+@model IPagedList<Transaction>
+@{
+    ViewData["Title"] = "View Transactions";
+    var account = (Account)ViewBag.Account;
+}
+
+    <div>
+        <!--label -->
+        <h1>List for @account.AccountNumber, @Context.Session.GetString(nameof(Customer.CustomerName)), Balance: @account.Balance</h1>
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(x => x[0].TransactionID)</th>
+                <th>@Html.DisplayNameFor(x => x[0].TransactionType)</th>
+                <th>@Html.DisplayNameFor(x => x[0].AccountNumber)</th>
+                <th>@Html.DisplayNameFor(x => x[0].DestAccount)</th>
+                <th>@Html.DisplayNameFor(x => x[0].Amount)</th>
+                <th>@Html.DisplayNameFor(x => x[0].Comment)</th>
+                <th>@Html.DisplayNameFor(x => x[0].ModifyDate)</th>
+            </tr>
+            @foreach (var transactionList in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => transactionList.TransactionID)</td>
+                    <td>@Html.DisplayFor(x => transactionList.TransactionType)</td>
+                    <td>@Html.DisplayFor(x => transactionList.AccountNumber)</td>
+                    <td>@Html.DisplayFor(x => transactionList.DestAccount.AccountNumber)</td>
+                    <td>@Html.DisplayFor(x => transactionList.Amount)</td>
+                    <td>@Html.DisplayFor(x => transactionList.Comment)</td>
+                    <!-- date time formate to local date from UTC now-->
+                    <td>@transactionList.ModifyDate.ToLocalTime().ToString("dd/MM/yyyy hh:mm tt")</td>
+                </tr>
+            }
+        </table>
+
+        <!-- use paged list pager to split page, pass different value in this way new, new-->
+        @Html.PagedListPager(Model, page => Url.Action("MyStatement", new { page = page, accountNum =account.AccountNumber }),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" }
+            })
+    </div>
+
+<div>
+    <a asp-action="Index">Back to Customers</a>
+</div>
