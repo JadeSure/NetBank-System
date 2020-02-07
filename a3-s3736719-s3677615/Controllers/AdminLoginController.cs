@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using a2.Web.Helper;
+
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System;
@@ -11,10 +11,10 @@ using a3_s3736719_s3677615.Models;
 
 
 // adjustive used week 7 tutorial example
-namespace NwbaExample.Controllers
+namespace a3_s3736719_s3677615.Controllers
 {
     // customized routing, hidden real link
-    [Route("/Admin/SecureLogin", Name ="AdminLogin")]
+    //[Route("/Admin/SecureLogin"]
     public class AdminLoginController : Controller
     {
        
@@ -25,29 +25,28 @@ namespace NwbaExample.Controllers
 
         // post info to login after clicking login button by post function
         [HttpPost]
-        // public  async Task<IActionResult> Login(string userID, string password)
-        public async Task<IActionResult> Login(String userID, string password)
+        public async Task<IActionResult> Login(String AdminId, string AdminName)
         {
-            ViewData["AdminTitle"] = "Admin Login";
+            ViewData["Admin Title"] = "Admin Login";
 
-
-            if (!userID.Equals("admin") || !password.Equals("jin"))
+            if (AdminId!="admin" || AdminName!="jin")
             { 
                 ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
 
                 // keep login message in the text input box when login failed
-                return View(new AdminLogin {AdminId = userID });
+                return View(new AdminLogin {AdminId = AdminId });
             }
 
-            HttpContext.Session.SetString(nameof(AdminLogin.AdminId), userID);
-            HttpContext.Session.SetString(nameof(AdminLogin.AdminName), password);
+            HttpContext.Session.SetString(nameof(AdminLogin.AdminId), AdminId);
+            HttpContext.Session.SetString(nameof(AdminLogin.AdminName), AdminName);
+
 
             // to Customer --> index method
-            return RedirectToAction("need to be filled");
+            return RedirectToAction("Index", "AdminUserProfile");
         }
 
         // customized routing
-        [Route("LogoutNow")]
+        [Route("/Admin/LogoutNow")]
         public IActionResult Logout()
         {
             // Logout customer, clear the session
