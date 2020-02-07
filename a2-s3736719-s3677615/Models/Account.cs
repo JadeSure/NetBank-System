@@ -37,7 +37,7 @@ namespace a2_s3736719_s3677615.Models
         [Required, ForeignKey("Customer")]
         [Display(Name = "Customer ID")]
         public int CustomerID { get; set; }
-        
+
 
         [Column(TypeName = "money"), DataType(DataType.Currency)]
         [Display(Name = "Current Balance")]
@@ -166,7 +166,7 @@ namespace a2_s3736719_s3677615.Models
 
             }
 
-    
+
             // check for bill pay
             if (type == TransactionType.B)
             {
@@ -187,7 +187,7 @@ namespace a2_s3736719_s3677615.Models
         public void MakeBillPay(decimal amount)
         {
             CheckBalance(amount, TransactionType.B);
-           
+
             // Add new withdraw transaction
             var billPay = new Transaction
             {
