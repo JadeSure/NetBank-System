@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-namespace a2.Web.Helper
+namespace a3_s3736719_s3677615.Helper
 {
     public class BankApi
     {

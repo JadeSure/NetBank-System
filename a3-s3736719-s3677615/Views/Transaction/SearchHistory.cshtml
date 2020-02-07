@@ -1,0 +1,58 @@
+﻿@model a3_s3736719_s3677615.ViewModels.SearchHistoryViewModel
+
+@{
+    ViewData["Title"] = "Search transaction history";
+}
+
+<h1>Search transaction history</h1>
+
+<h4>Search</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SearchHistory">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="CustomerID" class="control-label"></label>
+                <select asp-for="CustomerID" class="form-control" asp-items="ViewBag.CustomersList"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AccountNumber" class="control-label"></label>
+                <select asp-for="AccountNumber" class="form-control" asp-items="ViewBag.AccountsList"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TransactionType" class="control-label"></label>
+                <select asp-for="TransactionType" class="form-control" asp-items="Html.GetEnumSelectList<TransactionType>()"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MinAmount" class="control-label"></label>
+                <input asp-for="MinAmount" class="form-control" />
+                <span asp-validation-for="MinAmount" class="text-danger"></span>
+                <input asp-for="MaxAmount" class="form-control" />
+                <span asp-validation-for="MaxAmount" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" /> ~  <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control">
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="SearchHistory" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

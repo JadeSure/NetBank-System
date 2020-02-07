@@ -41,7 +41,7 @@ namespace WebApi
             {
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(NwbaDbContext)));
                 // this is for lazy loading
-                // options.UseLazyLoadingProxies();
+                options.UseLazyLoadingProxies();
             });
 
             

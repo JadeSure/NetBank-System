@@ -32,11 +32,9 @@ namespace WebApi.Models
         // The relation between Account and Transaction is defined using Fluent API in DbContext class
         [Required]
         public int AccountNumber { get; set; }
-        public virtual AccountAPI Account { get; set; }
 
         [ForeignKey("DestAccount")]
         public int? DestinationAccountNumber { get; set; }
-        public virtual AccountAPI DestAccount { get; set; }
 
         [Column(TypeName = "money"), DataType(DataType.Currency)]
         public decimal Amount { get; set; }
@@ -47,20 +45,10 @@ namespace WebApi.Models
         [DataType(DataType.DateTime)]
         public DateTime ModifyDate { get; set; }
 
-        // constructor
-        public TransactionAPI()
-        {
-        }
-
-        public TransactionAPI(TransactionType transactionType, int accountNumber,
-            decimal amount, string comment, DateTime dateTime)
-        {
-            this.TransactionType = transactionType;
-            this.AccountNumber = accountNumber;
-            this.DestinationAccountNumber = null;
-            this.Amount = amount;
-            this.Comment = comment;
-            this.ModifyDate = dateTime;
-        }
+        // Navigation properties: will not be mapped in JSON file to avoid loop
+        [JsonIgnore]
+        public virtual AccountAPI Account { get; set; }
+        [JsonIgnore]
+        public virtual AccountAPI DestAccount { get; set; }
     }
 }
