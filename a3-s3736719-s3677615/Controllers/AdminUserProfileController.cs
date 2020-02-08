@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SimpleHashing;
+using System.Text;
+using System.Net.Http;
 
 namespace a3_s3736719_s3677615.Controllers
 {
@@ -40,107 +42,102 @@ namespace a3_s3736719_s3677615.Controllers
         }
 
 
-       
+
 
 
         // GET: MyProfile/Details
-        //public async Task<IActionResult> Details()
-        //{
-        //    // Lazy loading.
-        //    var customer = await _context.Customers.FindAsync(CustomerID);
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            // step1: get request
+            var response = await BankApi.InitializeClient().GetAsync($"api/customers/{id}");
 
-        //    return View(customer);
-        //}
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+
+            // step 2: Storing the response details recieved from web api; (data type is String)
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            // step3: Deserializing the response recieved from web api and storing into a list.
+            var customer = JsonConvert.DeserializeObject<CustomerDto>(result);
+          
+            return View(customer);
+        }
 
         ////GET: MyProfile/Edit
-        //public async Task<IActionResult> Edit()
-        //{
-        //    var customer = await _context.Customers.FindAsync(CustomerID);
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+                return NotFound();
+            // step1: get request
+            var response = await BankApi.InitializeClient().GetAsync($"api/customers/{id}");
 
-        //    PopulateStateDropDownList(customer.State);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
 
-        //    return View(customer);
-        //}
+            // step 2: Storing the response details recieved from web api; (data type is String)
+            var result = response.Content.ReadAsStringAsync().Result;
 
-
-        ////[Bind(include: "CustomerName, TFN, Address, City, State, PostCode, Phone")]
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(Customer customer)
-        //{
-        //    var customerToBeUpdated = await _context.Customers.FindAsync(CustomerID);
-
-        //    if (await TryUpdateModelAsync<Customer>(customerToBeUpdated, "",
-        //       c => c.CustomerName,
-        //       c => c.TFN,
-        //       c => c.Address,
-        //       c => c.City,
-        //       c => c.State,
-        //       c => c.PostCode,
-        //       c => c.Phone))
-        //    {
-        //        try
-        //        {
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateException /* ex */)
-        //        {
-        //            //Log the error (uncomment ex variable name and write a log.)
-        //            ModelState.AddModelError("", "Unable to save changes. " +
-        //                "Try again, and if the problem persists, " +
-        //                "see your system administrator.");
-        //        }
-        //        return RedirectToAction(nameof(Details));
-        //    }
-
-        //    return View(customer);
-        //}
+            // step3: Deserializing the response recieved from web api and storing into a list.
+            var customer = JsonConvert.DeserializeObject<CustomerDto>(result);
+            
+            return View(customer);
+        }
 
 
-        //private void PopulateStateDropDownList(object selectedState = null)
-        //{
+        //[Bind(include: "CustomerName, TFN, Address, City, State, PostCode, Phone")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, CustomerDto customer)
+        {
+            if (id != customer.CustomerID)
+                return NotFound();
 
-        //    var States = Enum.GetValues(typeof(State))
-        //        .Cast<State>()
-        //        .Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() })
-        //        .ToList();
+            if (ModelState.IsValid)
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
+                var response = BankApi.InitializeClient().PutAsync("api/customers", content).Result;
 
-        //    ViewBag.States = new SelectList(States, "Value", "Text", selectedState);
-        //}
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction("Index");
+            }
+       
+            return View(customer);
+        }
 
-        ////GET: MyProfile/ChangePassword
-        //public async Task<IActionResult> ChangePassword()
-        //{
+        // GET: Movies/Delete/1
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
 
-        //    return View(new PasswordViewModel
-        //    {
-        //        Login = await _context.Logins.FindAsync(CustomerID)
-        //    });
-        //}
+            var response = await BankApi.InitializeClient().GetAsync($"api/customers/{id}");
 
-        //// change password function
-        //[HttpPost]
-        //public async Task<IActionResult> ChangePassword(PasswordViewModel model)
-        //{
-        //    model.Login = await _context.Logins.FindAsync(model.Login.CustomerID);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
 
-        //    try
-        //    {
-        //        model.Login.ChangePassword(model.OldPassword, model.NewPassword);
-        //    }
-        //    catch (ArgumentOutOfRangeException ae)
-        //    {
-        //        ModelState.AddModelError("", ae.Message);
-        //        return View(model);
-        //    }
-        //    catch (InvalidOperationException ie)
-        //    {
-        //        ModelState.AddModelError("", ie.Message);
-        //        return View(model);
-        //    }
+            var result = response.Content.ReadAsStringAsync().Result;
+            var customer = JsonConvert.DeserializeObject<CustomerDto>(result);
 
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Details));
-        //}
+            return View(customer);
+        }
+
+        // POST: Movies/Delete/1
+        [HttpPost]
+        [ActionName("Delete")]
+        // [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var response = BankApi.InitializeClient().DeleteAsync($"api/customers/{id}").Result;
+
+            if (response.IsSuccessStatusCode)
+                return RedirectToAction("Index");
+
+            return NotFound();
+        }
 
     }
 }

@@ -13,13 +13,15 @@ using a3_s3736719_s3677615.Models;
 // adjustive used week 7 tutorial example
 namespace a3_s3736719_s3677615.Controllers
 {
-    // customized routing, hidden real link
-    //[Route("/Admin/SecureLogin"]
+    // [Route("/Admin/SecureLogin")]
     public class AdminLoginController : Controller
     {
        
         // default page by get, only in url XX/Login, this method will be call
         [HttpGet]
+        // customized routing, hidden real link
+        
+        //[ActionName("Login")]
         public IActionResult Login() => View();
 
 

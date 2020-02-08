@@ -28,7 +28,7 @@ namespace a3_s3736719_s3677615
             services.AddSession(options =>
             {
                 // add idle time out in 10 seconds
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                // options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential.
                 options.Cookie.IsEssential = true;
