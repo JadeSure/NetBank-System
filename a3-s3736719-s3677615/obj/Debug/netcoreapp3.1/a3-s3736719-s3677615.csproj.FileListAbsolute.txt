@@ -356,3 +356,5 @@ C:\Users\user\source\repos\ass3\a3-s3736719-s3677615\a3-s3736719-s3677615\a3-s37
 C:\Users\user\source\repos\ass3\a3-s3736719-s3677615\a3-s3736719-s3677615\a3-s3736719-s3677615\obj\Debug\netcoreapp3.1\Razor\Views\AdminUserProfile\Details.cshtml.g.cs
 C:\Users\user\source\repos\ass3\a3-s3736719-s3677615\a3-s3736719-s3677615\a3-s3736719-s3677615\obj\Debug\netcoreapp3.1\Razor\Views\AdminUserProfile\Edit.cshtml.g.cs
 C:\Users\user\source\repos\ass3\a3-s3736719-s3677615\a3-s3736719-s3677615\a3-s3736719-s3677615\obj\Debug\netcoreapp3.1\Razor\Views\AdminUserProfile\Delete.cshtml.g.cs
+C:\Users\user\source\repos\ass3\a3-s3736719-s3677615\a3-s3736719-s3677615\a3-s3736719-s3677615\obj\Debug\netcoreapp3.1\Razor\Views\AdminAccount\Index.cshtml.g.cs
+C:\Users\user\source\repos\ass3\a3-s3736719-s3677615\a3-s3736719-s3677615\a3-s3736719-s3677615\obj\Debug\netcoreapp3.1\Razor\Views\AdminBillPay\Index.cshtml.g.cs

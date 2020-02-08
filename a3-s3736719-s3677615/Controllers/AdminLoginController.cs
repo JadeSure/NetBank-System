@@ -29,7 +29,7 @@ namespace a3_s3736719_s3677615.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(String AdminId, string AdminName)
         {
-            ViewData["Admin Title"] = "Admin Login";
+           
 
             if (AdminId!="admin" || AdminName!="jin")
             { 

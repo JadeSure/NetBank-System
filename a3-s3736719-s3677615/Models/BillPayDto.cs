@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace a2_s3736719_s3677615.Models
+namespace a3_s3736719_s3677615.Models
 {
     public enum Period
     {
@@ -27,7 +27,7 @@ namespace a2_s3736719_s3677615.Models
     }
 
 
-    public class BillPay
+    public class BillPayDto
     {
         // Entity Framework
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -35,11 +35,10 @@ namespace a2_s3736719_s3677615.Models
 
         [ForeignKey("Account")]
         public int AccountNumber { get; set; }
-        public virtual Account Account { get; set; }
+
 
         [ForeignKey("Payee")]
         public int PayeeID { get; set; }
-        public virtual Payee Payee { get; set; }
 
         [Column(TypeName = "money"), DataType(DataType.Currency)]
         public decimal Amount { get; set; }
@@ -54,9 +53,5 @@ namespace a2_s3736719_s3677615.Models
         public DateTime ModifyDate { get; set; }
 
         public BillPayStatus BillPayStatus { get; set; }
-
-        public BillPay()
-        {
-        }
     }
 }

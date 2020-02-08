@@ -19,6 +19,14 @@ namespace WebApi.Models
         S = 4
     }
 
+    public enum BillPayStatus
+    {
+        [Display(Name = "Ready")]
+        Ready = 1,
+        [Display(Name = "Blocked")]
+        Blocked = 2
+    }
+
 
     public class BillPayAPI
     {
@@ -30,10 +38,12 @@ namespace WebApi.Models
 
         [ForeignKey("Account")]
         public int AccountNumber { get; set; }
+        [JsonIgnore]
         public virtual AccountAPI Account { get; set; }
 
         [ForeignKey("Payee")]
         public int PayeeID { get; set; }
+        [JsonIgnore]
         public virtual PayeeAPI Payee { get; set; }
 
         [Column(TypeName = "money"), DataType(DataType.Currency)]
@@ -47,6 +57,8 @@ namespace WebApi.Models
 
         [Required, DataType(DataType.DateTime)]
         public DateTime ModifyDate { get; set; }
+        public BillPayStatus BillPayStatus { set; get; }
+
 
         public BillPayAPI()
         {

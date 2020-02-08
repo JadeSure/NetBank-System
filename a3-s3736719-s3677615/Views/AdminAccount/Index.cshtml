@@ -1,0 +1,52 @@
+﻿@model IEnumerable<a3_s3736719_s3677615.Models.LoginDto>
+
+@{
+    ViewData["Title"] = "Customer Account List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Customters List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifyDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoginStatus)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @item.ModifyDate.ToLocalTime().ToString("dd/MM/yyyy hh:mm tt")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoginStatus)
+            </td>
+
+            <td>
+                <a asp-action="Lock" asp-route-id="@item.CustomerID">Lock</a> |
+                <a asp-action="UnLock" asp-route-id="@item.CustomerID">UnLock</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

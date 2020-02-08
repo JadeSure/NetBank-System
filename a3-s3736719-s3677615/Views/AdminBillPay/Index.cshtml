@@ -1,0 +1,69 @@
+﻿@model IEnumerable<a3_s3736719_s3677615.Models.BillPayDto>
+
+@{
+    ViewData["Title"] = "BillPay List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Customters List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Period)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifyDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillPayStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @item.ScheduleDate.ToLocalTime().ToString("dd/MM/yyyy hh:mm tt")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Period)
+            </td>
+            <td>
+                @item.ModifyDate.ToLocalTime().ToString("dd/MM/yyyy hh:mm tt")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillPayStatus)
+            </td>
+
+            <td>
+                <a asp-action="Block" asp-route-id="@item.BillPayID">Block</a> |
+                <a asp-action="UnBlock" asp-route-id="@item.BillPayID">UnBlock</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

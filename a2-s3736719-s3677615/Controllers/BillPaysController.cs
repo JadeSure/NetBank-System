@@ -65,6 +65,7 @@ namespace a2_s3736719_s3677615.Controllers
         {
           
             billPay.ScheduleDate = DateTime.SpecifyKind(billPay.ScheduleDate, DateTimeKind.Local).ToUniversalTime();
+            billPay.BillPayStatus = BillPayStatus.Ready;
 
             if (billPay.ScheduleDate <= DateTime.UtcNow)
             {
