@@ -32,10 +32,10 @@ namespace WebApi.Models
         // The relation between Account and Transaction is defined using Fluent API in DbContext class
         [Required]
         public int AccountNumber { get; set; }
-
+       
         [ForeignKey("DestAccount")]
         public int? DestinationAccountNumber { get; set; }
-
+        
         [Column(TypeName = "money"), DataType(DataType.Currency)]
         public decimal Amount { get; set; }
 

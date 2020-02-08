@@ -8,7 +8,6 @@ using System;
 using System.Linq;
 using a2_s3736719_s3677615.Utilities;
 
-
 // adjustive used week 7 tutorial example
 namespace a2_s3736719_s3677615.Controllers
 {

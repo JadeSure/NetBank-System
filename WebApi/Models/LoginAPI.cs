@@ -40,29 +40,5 @@ namespace WebApi.Models
         public LoginAPI()
         {
         }
-
-        // change password in model
-        public void ChangePassword(string oldPwd, string newPwd)
-        {
-            
-            if (oldPwd == null || newPwd == null)
-            {
-                throw new ArgumentOutOfRangeException("Password cannot be empty.");
-            }
-
-            if (!PBKDF2.Verify(PasswordHash, oldPwd))
-            {
-                throw new InvalidOperationException("Password incorrect.");
-            }
-
-            if (oldPwd.Equals(newPwd))
-            {
-                throw new InvalidOperationException("New password cannot be the same as old one.");
-            }
-
-            PasswordHash = PBKDF2.Hash(newPwd);
-            ModifyDate = DateTime.UtcNow;
-        }
-
     }
 }

@@ -56,10 +56,11 @@ namespace WebApi.Models
         //Navigational Property
         [JsonIgnore]
         public virtual CustomerAPI Customer { get; set; }
+        [JsonIgnore]
         public virtual List<BillPayAPI> BillPays { get; set; }
+        [JsonIgnore]
         public virtual List<TransactionAPI> Transactions { get; set; }
 
-        
         }
 
 

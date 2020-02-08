@@ -14,8 +14,11 @@ namespace a2_s3736719_s3677615.Data
             using var context = new NwbaDbContext(serviceProvider.GetRequiredService<DbContextOptions<NwbaDbContext>>());
 
             //Look for customers.
-            //if (context.Customers.Any())
-            //    return; // DB has already been seeded.
+            if (context.Customers.Any())
+                return; // DB has already been seeded.
+
+
+            const string format = "dd/MM/yyyy hh:mm:ss tt";
 
             // set default data to database by data seed
             //context.Customers.AddRange(
@@ -46,7 +49,7 @@ namespace a2_s3736719_s3677615.Data
             //        Phone = "(61)- 3456 7890"
             //    });
 
-            const string format = "dd/MM/yyyy hh:mm:ss tt";
+            
 
             //context.Logins.AddRange(
             //    new Login
@@ -54,23 +57,28 @@ namespace a2_s3736719_s3677615.Data
             //        UserID = "12345678",
             //        CustomerID = 2100,
             //        PasswordHash = "YBNbEL4Lk8yMEWxiKkGBeoILHTU7WZ9n8jJSy8TNx0DAzNEFVsIVNRktiQV+I8d2",
-            //        ModifyDate = DateTime.ParseExact("01/01/2019 08:00:00 PM", format, null)
+            //        ModifyDate = DateTime.ParseExact("01/01/2019 08:00:00 PM", format, null),
+            //        AttemptCount = 0,
+            //        LoginStatus = LoginStatus.Active
             //    },
             //    new Login
             //    {
             //        UserID = "38074569",
             //        CustomerID = 2200,
             //        PasswordHash = "EehwB3qMkWImf/fQPlhcka6pBMZBLlPWyiDW6NLkAh4ZFu2KNDQKONxElNsg7V04",
-            //        ModifyDate = DateTime.ParseExact("01/01/2019 08:00:00 PM", format, null)
+            //        ModifyDate = DateTime.ParseExact("01/01/2019 08:00:00 PM", format, null),
+            //        AttemptCount = 0,
+            //        LoginStatus = LoginStatus.Active
             //    },
             //    new Login
             //    {
             //        UserID = "17963428",
             //        CustomerID = 2300,
             //        PasswordHash = "LuiVJWbY4A3y1SilhMU5P00K54cGEvClx5Y+xWHq7VpyIUe5fe7m+WeI0iwid7GE",
-            //        ModifyDate = DateTime.ParseExact("01/01/2019 08:00:00 PM", format, null)
+            //        ModifyDate = DateTime.ParseExact("01/01/2019 08:00:00 PM", format, null),
+            //        AttemptCount = 0,
+            //        LoginStatus = LoginStatus.Active
             //    });
-
 
 
             //context.Accounts.AddRange(
@@ -114,41 +122,41 @@ namespace a2_s3736719_s3677615.Data
             //});
 
 
-            const string openingBalance = "Opening balance";
+            //const string openingBalance = "Opening balance";
 
-            context.Transactions.AddRange(
-                new Transaction
-                {
-                    TransactionType = TransactionType.D,
-                    AccountNumber = 1008,
-                    Amount = 100,
-                    Comment = openingBalance,
-                    ModifyDate = DateTime.ParseExact("19/12/2019 08:00:00 PM", format, null)
-                },
-                new Transaction
-                {
-                    TransactionType = TransactionType.D,
-                    AccountNumber = 1009,
-                    Amount = 500,
-                    Comment = openingBalance,
-                    ModifyDate = DateTime.ParseExact("19/12/2019 08:30:00 PM", format, null)
-                },
-                new Transaction
-                {
-                    TransactionType = TransactionType.D,
-                    AccountNumber = 1010,
-                    Amount = 500.95m,
-                    Comment = openingBalance,
-                    ModifyDate = DateTime.ParseExact("19/12/2019 09:00:00 PM", format, null)
-                },
-                new Transaction
-                {
-                    TransactionType = TransactionType.D,
-                    AccountNumber = 1011,
-                    Amount = 1250.50m,
-                    Comment = openingBalance,
-                    ModifyDate = DateTime.ParseExact("19/12/2019 10:00:00 PM", format, null)
-                });
+            //context.Transactions.AddRange(
+            //    new Transaction
+            //    {
+            //        TransactionType = TransactionType.D,
+            //        AccountNumber = 1040,
+            //        Amount = 100,
+            //        Comment = openingBalance,
+            //        ModifyDate = DateTime.ParseExact("19/12/2019 08:00:00 PM", format, null)
+            //    },
+            //    new Transaction
+            //    {
+            //        TransactionType = TransactionType.D,
+            //        AccountNumber = 1041,
+            //        Amount = 500,
+            //        Comment = openingBalance,
+            //        ModifyDate = DateTime.ParseExact("19/12/2019 08:30:00 PM", format, null)
+            //    },
+            //    new Transaction
+            //    {
+            //        TransactionType = TransactionType.D,
+            //        AccountNumber = 1042,
+            //        Amount = 500.95m,
+            //        Comment = openingBalance,
+            //        ModifyDate = DateTime.ParseExact("19/12/2019 09:00:00 PM", format, null)
+            //    },
+            //    new Transaction
+            //    {
+            //        TransactionType = TransactionType.D,
+            //        AccountNumber = 1043,
+            //        Amount = 1250.50m,
+            //        Comment = openingBalance,
+            //        ModifyDate = DateTime.ParseExact("19/12/2019 10:00:00 PM", format, null)
+            //    });
 
 
 
