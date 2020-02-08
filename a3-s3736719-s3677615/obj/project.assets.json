@@ -9939,11 +9939,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/a3-s3736719-s3677615.csproj",
+      "projectUniqueName": "/Users/jin/Projects/Git/untitled folder/a3-s3736719-s3677615/a3-s3736719-s3677615/a3-s3736719-s3677615.csproj",
       "projectName": "a3-s3736719-s3677615",
-      "projectPath": "/Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/a3-s3736719-s3677615.csproj",
+      "projectPath": "/Users/jin/Projects/Git/untitled folder/a3-s3736719-s3677615/a3-s3736719-s3677615/a3-s3736719-s3677615.csproj",
       "packagesPath": "/Users/jin/.nuget/packages/",
-      "outputPath": "/Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/",
+      "outputPath": "/Users/jin/Projects/Git/untitled folder/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jin/.config/NuGet/NuGet.Config"
@@ -9957,8 +9957,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "/Users/jin/Projects/Git/a3-s3736719-s3677615/a2-s3736719-s3677615/a2-s3736719-s3677615.csproj": {
-              "projectPath": "/Users/jin/Projects/Git/a3-s3736719-s3677615/a2-s3736719-s3677615/a2-s3736719-s3677615.csproj"
+            "/Users/jin/Projects/Git/untitled folder/a3-s3736719-s3677615/a2-s3736719-s3677615/a2-s3736719-s3677615.csproj": {
+              "projectPath": "/Users/jin/Projects/Git/untitled folder/a3-s3736719-s3677615/a2-s3736719-s3677615/a2-s3736719-s3677615.csproj"
             }
           }
         }
