@@ -36,12 +36,25 @@ namespace WebApi.Controllers
             return _repo.Get(id);
         }
 
+        // POST: api/Transactions/search
+        [HttpPost("Search")]
+        public IEnumerable<TransactionAPI> Search([FromBody] TransactionRequest transaction)
+        {
+            if (!ModelState.IsValid)
+                return null;
+
+            var transactions = _repo.GetAllByRequest(transaction);
+
+            return transactions;
+        }
+
         // POST api/Transactions
         [HttpPost]
         public void Post([FromBody] TransactionAPI transaction)
         {
             _repo.Add(transaction);
         }
+
 
         // PUT api/Transactions
         [HttpPut]
@@ -56,6 +69,5 @@ namespace WebApi.Controllers
         {
             return _repo.Delete(id);
         }
-
     }
 }

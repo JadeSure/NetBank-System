@@ -61,22 +61,8 @@ namespace WebApi.Models
         [StringLength(15)]
         public string Phone { get; set; }
 
+        [JsonIgnore]
         public virtual List<AccountAPI> Accounts { get; set; }
-
-        public CustomerAPI()
-        {
-        }
-
-        public CustomerAPI(int customerID, string customerName, string tfn, string address, string city, string postCode, string phone)
-        {
-            CustomerID = customerID;
-            CustomerName = customerName;
-            TFN = tfn;
-            Address = address;
-            City = city;
-            PostCode = postCode;
-            Phone = phone;
-        }
 
     }
 }

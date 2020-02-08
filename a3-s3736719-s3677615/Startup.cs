@@ -58,7 +58,7 @@ namespace a3_s3736719_s3677615
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=AdminLogin}/{action=Login}/{id?}");
+                    pattern: "{controller=Transaction}/{action=SearchHistory}/{id?}");
             });
         }
     }

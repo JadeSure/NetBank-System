@@ -165,7 +165,6 @@
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs
-/Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/Transaction/Index (copy).cshtml.g.cs
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/Transaction/SearchHistory.cshtml.g.cs
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs
@@ -175,3 +174,4 @@
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/a3-s3736719-s3677615.csproj.CopyComplete
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/a3-s3736719-s3677615.dll
 /Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/a3-s3736719-s3677615.pdb
+/Users/jin/Projects/Git/a3-s3736719-s3677615/a3-s3736719-s3677615/obj/Debug/netcoreapp3.1/Razor/Views/Transaction/Index.cshtml.g.cs

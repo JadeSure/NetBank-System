@@ -8,9 +8,8 @@ using System;
 using System.Linq;
 using a2_s3736719_s3677615.Utilities;
 
-
 // adjustive used week 7 tutorial example
-namespace NwbaExample.Controllers
+namespace a2_s3736719_s3677615.Controllers
 {
     // customized routing, hidden real link
     [Route("/Nwba/SecureLogin")]
