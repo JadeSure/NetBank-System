@@ -1,7 +1,6 @@
-﻿@using a2_s3736719_s3677615.Models
-@model Login
+﻿@model AdminLogin
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Admin Login";
 }
 
     <h1 class="display-4">哦哈哟, Commander Jin</h1>
@@ -11,15 +10,15 @@
         <form asp-action="Login">
             <div class="form-group">
                 <!--automatically validation-->
-                <label asp-for="UserID" class="control-label"></label>
-                <input asp-for="UserID" class="form-control" />
-                <span asp-validation-for="UserID" class="text-danger"></span>
+                <label asp-for="AdminId" class="control-label"></label>
+                <input asp-for="AdminId" class="form-control" />
+                <span asp-validation-for="AdminId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="Password" class="control-label">Password</label>
-                <input id="Password" name="Password" type="password" class="form-control"
+                <label asp-for="AdminName" class="control-label">Password</label>
+                <input asp-for="AdminName" name="AdminName" type="password" class="form-control"
                        data-val="true" data-val-required="The Password field is required." />
-                @Html.ValidationMessage("Password", new { @class = "text-danger" })
+                @Html.ValidationMessage("AdminName", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-primary" />

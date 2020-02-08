@@ -36,7 +36,7 @@ namespace a2_s3736719_s3677615
                {
                    // monthly
                    case Period.M:
-                       if (DateTimeChecking.SameDifferentMonth(bill.ScheduleDate, rightnow))
+                       if (DateTimeChecking.SameDifferentMonth(bill.ScheduleDate, rightnow) && bill.BillPayStatus == BillPayStatus.Ready)
                        {
                            PayBill(bill);
                        }
@@ -44,7 +44,7 @@ namespace a2_s3736719_s3677615
 
                    // annually
                    case Period.Y:
-                       if (DateTimeChecking.SameDifferentYear(bill.ScheduleDate, rightnow))
+                       if (DateTimeChecking.SameDifferentYear(bill.ScheduleDate, rightnow) && bill.BillPayStatus == BillPayStatus.Ready)
                        {
                            PayBill(bill);
                        }
@@ -52,7 +52,7 @@ namespace a2_s3736719_s3677615
 
                     // quarterly
                    case Period.Q:
-                       if (DateTimeChecking.SameDifferentQuarter(bill.ScheduleDate, rightnow))
+                       if (DateTimeChecking.SameDifferentQuarter(bill.ScheduleDate, rightnow) && bill.BillPayStatus == BillPayStatus.Ready)
                        {
                            PayBill(bill);
                        }
@@ -60,7 +60,7 @@ namespace a2_s3736719_s3677615
 
                     // once only
                    case Period.S:
-                       if (DateTimeChecking.SameDifferentMin(bill.ScheduleDate, rightnow))
+                       if (DateTimeChecking.SameDifferentMin(bill.ScheduleDate, rightnow) && bill.BillPayStatus == BillPayStatus.Ready)
                        { 
                            PayBill(bill);
                        }
