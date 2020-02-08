@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using a2.Web.Helper;
+using a3_s3736719_s3677615.Helper;
 using a3_s3736719_s3677615.Models;
 using a3_s3736719_s3677615.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -37,47 +40,50 @@ namespace a3_s3736719_s3677615.Controllers
             return View(new SearchHistoryViewModel());
         }
 
-        // POST: Transaction/SearchHistory
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> SearchHistory(SearchHistoryViewModel model)
-        //{
+        // GET: Transaction/SearchHistory
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SearchHistory(SearchHistoryViewModel searchRequest)
+        {
 
-        // No result
-        //return View(model);
+            if (ModelState.IsValid)
+            {
+                if (searchRequest.StartTime.HasValue)
+                {
+                    searchRequest.StartTime = DateTime.SpecifyKind((DateTime)searchRequest.StartTime, DateTimeKind.Local).ToUniversalTime();
+                }
 
-        // Has result
-        // RedirectToAction("Report");
+                if (searchRequest.EndTime.HasValue)
+                {
+                    searchRequest.EndTime = DateTime.SpecifyKind((DateTime)searchRequest.EndTime, DateTimeKind.Local).ToUniversalTime();
+                }
 
-        //if (ModelState.IsValid)
-        //{
-        //    var content = new StringContent(JsonConvert.SerializeObject(movie), Encoding.UTF8, "application/json");
-        //    var response = MovieApi.InitializeClient().PostAsync("api/movies", content).Result;
+                var content = new StringContent(JsonConvert.SerializeObject(searchRequest), Encoding.UTF8, "application/json");
+                var response = await BankApi.InitializeClient().PostAsync("api/transactions/search", content);
 
-        //    if (response.IsSuccessStatusCode)
-        //        return RedirectToAction("Index");
-        //}
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    HttpContext.Session.SetString("searchResult", result);
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(searchRequest);
+        }
 
-        //return View(movie);
 
-        //}
+        public IActionResult Index()
+        {
 
+            //var response = await BankApi.InitializeClient().GetAsync("api/transactions");
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var response = await BankApi.InitializeClient().GetAsync("api/transactions");
+            // Storing the response details recieved from web api.
+            var result = HttpContext.Session.GetString("searchResult");
+            // Deserializing the response recieved from web api and storing into a list
+            var transactions = JsonConvert.DeserializeObject<List<TransactionDto>>(result);
 
-        //    if (!response.IsSuccessStatusCode)
-        //        throw new Exception();
-
-        //    // Storing the response details recieved from web api.
-        //    var result = response.Content.ReadAsStringAsync().Result;
-
-        //    // Deserializing the response recieved from web api and storing into a list.
-        //    var transactions = JsonConvert.DeserializeObject<List<TransactionDto>>(result);
-
-        //    return View(transactions);
-        //}
+            return View(transactions);
+        } 
 
     }
 }

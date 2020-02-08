@@ -1,0 +1,34 @@
+﻿@model IEnumerable<a3_s3736719_s3677615.Models.TransactionDto>
+
+@{
+    ViewData["Title"] = "Transactions list";
+}
+
+    <h1>Transaction List</h1>
+    <div>
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.TransactionID)</th>
+                <th>@Html.DisplayNameFor(model => model.TransactionType)</th>
+                <th>@Html.DisplayNameFor(model => model.AccountNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.DestinationAccountNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                <th>@Html.DisplayNameFor(model => model.Comment)</th>
+                <th>@Html.DisplayNameFor(model => model.ModifyDate)</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.TransactionID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TransactionType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AccountNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DestinationAccountNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Comment)</td>
+                    <!-- date time formate to local date from UTC now-->
+                    <td>@item.ModifyDate.ToLocalTime().ToString("dd/MM/yyyy hh:mm tt")</td>
+                </tr>
+            }
+        </table>
+
+    </div>
