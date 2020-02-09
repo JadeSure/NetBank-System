@@ -7,12 +7,14 @@
     <title>@ViewData["AdminTitle"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", false)
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand"  href = "https://localhost:44359/Home/Index">a3_s3736719_s3677615</a>
+                <a class="navbar-brand" href="https://localhost:44359/Home/Index">Online Banking System</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +40,11 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="AdminLogin" asp-action="Login">Login</a>
+                                <a class="nav-link text-dark" asp-controller="AdminLogin" asp-action="Login">Admin Login</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="https://localhost:44359/Nwba/SecureLogin">User Login</a>
                             </li>
                         }
                     </ul>
@@ -49,19 +55,19 @@
                         {
                             <!--when user login the system, it will appear Transactions, Accounts, Scheduled pay and User Profile-->
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Transaction" asp-action="SearchHistory">Transactions</a>
+                                <a class="nav-link text-dark" asp-controller="Transaction" asp-action="SearchHistory">Search Transactions</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="AdminAccount" asp-action="Index">Accounts</a>
+                                <a class="nav-link text-dark" asp-controller="AdminAccount" asp-action="Index">Manage Accounts</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="AdminBillPay" asp-action="Index">Scheduled pay</a>
+                                <a class="nav-link text-dark" asp-controller="AdminBillPay" asp-action="Index">Scheduled BillPays</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="AdminUserProfile" asp-action="Index">User Profile</a>
+                                <a class="nav-link text-dark" asp-controller="AdminUserProfile" asp-action="Index">Manage User Profile</a>
                             </li>
                         }
 

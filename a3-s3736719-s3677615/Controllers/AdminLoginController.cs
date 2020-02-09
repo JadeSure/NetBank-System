@@ -19,9 +19,6 @@ namespace a3_s3736719_s3677615.Controllers
        
         // default page by get, only in url XX/Login, this method will be call
         [HttpGet]
-        // customized routing, hidden real link
-        //[Route("/Admin/SecureLogin")]
-        //[ActionName("Login")]
         public IActionResult Login() => View();
 
 
@@ -29,7 +26,6 @@ namespace a3_s3736719_s3677615.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(String AdminId, string AdminName)
         {
-           
 
             if (AdminId!="admin" || AdminName!="admin")
             { 
@@ -44,7 +40,7 @@ namespace a3_s3736719_s3677615.Controllers
 
 
             // to Customer --> index method
-            return RedirectToAction("Index", "AdminUserProfile");
+            return RedirectToAction("SearchHistory", "Transaction");
         }
 
         // customized routing

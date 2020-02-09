@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using a3_s3736719_s3677615.Attributes;
 using a3_s3736719_s3677615.Helper;
 using a3_s3736719_s3677615.Models;
 using a3_s3736719_s3677615.Utilities;
@@ -14,6 +15,7 @@ using Newtonsoft.Json;
 
 namespace a3_s3736719_s3677615.Controllers
 {
+    [AuthorizeCustomer]
     public class TransactionController : Controller
     {
         // GET: Transaction/SearchHistory
