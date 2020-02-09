@@ -7,6 +7,7 @@ using WebApi.Models.Repository;
 
 namespace WebApi.Models.DataManager
 {
+    // connect to the database directly to manage accounts
     public class AccountManager : IDataRepository<AccountAPI, int>
     {
         private readonly NwbaDbContext _context;
@@ -16,6 +17,7 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
+        // add account
         public int Add(AccountAPI item)
         {
             _context.Accounts.Add(item);
@@ -23,6 +25,7 @@ namespace WebApi.Models.DataManager
             return item.AccountNumber;
         }
 
+        // delete account
         public int Delete(int id)
         {
             _context.Accounts.Remove(_context.Accounts.Find(id));
@@ -30,16 +33,19 @@ namespace WebApi.Models.DataManager
             return id;
         }
 
+        // get account based on specific id
         public AccountAPI Get(int id)
         {
             return _context.Accounts.Find(id);
         }
 
+        // get all accounts
         public IEnumerable<AccountAPI> GetAll()
         {
             return _context.Accounts.ToList();
         }
 
+        // update account value based on specific id
         public int Update(int id, AccountAPI item)
         {
             _context.Update(item);

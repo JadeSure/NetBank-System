@@ -22,35 +22,35 @@ namespace WebApi.Controllers
             _repo = repo;
         }
 
-        // GET: api/BillPays
+        // GET: api/get all BillPays
         [HttpGet]
         public IEnumerable<BillPayAPI> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET api/BillPay/1
+        // GET api/ get BillPay from specific one
         [HttpGet("{id}")]
         public BillPayAPI Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST api/BillPay
+        // POST api/ add another bill pay
         [HttpPost]
         public void Post([FromBody] BillPayAPI billPay)
         {
             _repo.Add(billPay);
         }
 
-        // PUT api/billPay
+        // PUT api/ update bill pay
         [HttpPut]
         public void Put([FromBody] BillPayAPI billPay)
         {
             _repo.Update(billPay.BillPayID, billPay);
         }
 
-        // DELETE api/billPay/1
+        // DELETE api/billPay by specific id
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

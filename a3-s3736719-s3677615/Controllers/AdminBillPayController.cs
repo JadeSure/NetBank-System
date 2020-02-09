@@ -9,11 +9,15 @@ using a3_s3736719_s3677615.Models;
 using a3_s3736719_s3677615.Helper;
 using System.Net.Http;
 using System.Text;
+using a3_s3736719_s3677615.Attributes;
 
 namespace a3_s3736719_s3677615.Controllers
 {
+    // protection
+    [AuthorizeCustomer]
     public class AdminBillPayController : Controller
     {
+        [Route("/Admin/SecureBillPay")]
         public async Task<IActionResult> Index()
         {
             // step1: get request
@@ -34,6 +38,7 @@ namespace a3_s3736719_s3677615.Controllers
         // lock user login status
         // [HttpPost]
         // [ValidateAntiForgeryToken]
+        [Route("/Admin/SecureBlock")]
         public async Task<IActionResult> Block(int id)
         {
             // step1: get request
@@ -67,6 +72,7 @@ namespace a3_s3736719_s3677615.Controllers
         // unlocked user login status
         // [HttpPost]
         // [ValidateAntiForgeryToken]
+        [Route("/Admin/SecureUnBlock")]
         public async Task<IActionResult> UnBlock(int id)
         {
             // step1: get request

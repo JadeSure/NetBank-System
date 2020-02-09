@@ -59,10 +59,9 @@ namespace a3_s3736719_s3677615
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-
                 endpoints.MapControllerRoute(
-                    "default", "{controller=AdminLogin}/{action=Index}/{id?}");
+                    name: "default",
+                    pattern: "{controller=AdminHome}/{action=Index}/{id?}");
             });
 
         }

@@ -172,12 +172,18 @@ namespace a2_s3736719_s3677615.Models
             {
                 if (AccountType == AccountType.C)
                 {
-                    throw new InvalidOperationException("Not sufficient funds for this billpay. The current balance is " + Balance);
+                    if (Balance - amount < CheckingMiniBalance)
+                    {
+                        throw new InvalidOperationException("Not sufficient funds for this billpay. The current balance is " + Balance);
+                    }
                 }
 
                 if (AccountType == AccountType.S)
                 {
-                    throw new InvalidOperationException("Not sufficient funds for this billpay. The current balance is " + Balance);
+                    if (Balance - amount < SavingMiniBalance)
+                    {
+                        throw new InvalidOperationException("Not sufficient funds for this billpay. The current balance is " + Balance);
+                    }
                 }
             }
 
@@ -192,6 +198,7 @@ namespace a2_s3736719_s3677615.Models
             var billPay = new Transaction
             {
                 TransactionType = TransactionType.B,
+                
                 Amount = amount,
                 ModifyDate = DateTime.UtcNow,
                 Comment = "BillPay $" + amount

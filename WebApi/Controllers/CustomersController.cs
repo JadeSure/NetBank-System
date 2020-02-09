@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             return _repo.GetAll();
         }
 
-        // GET api/Customers/1
+        // GET api/Customers/ based on specific id
         [HttpGet("{id}")]
         public CustomerAPI Get(int id)
         {
@@ -50,7 +50,7 @@ namespace WebApi.Controllers
             _repo.Update(customer.CustomerID, customer);
         }
 
-        // DELETE api/Customers/1
+        // DELETE api/Customers/ based on specific id
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

@@ -63,7 +63,7 @@ namespace a3_s3736719_s3677615.Controllers
             return View(searchRequest);
         }
 
-
+        [Route("/Admin/SecureTransaction")]
         public IActionResult Index()
         {
 
@@ -74,6 +74,7 @@ namespace a3_s3736719_s3677615.Controllers
             return View(transactions);
         }
 
+        [Route("/Admin/SecurePieChart")]
         public IActionResult SearchPieChart()
         {
             // Get the response details from session
@@ -101,6 +102,7 @@ namespace a3_s3736719_s3677615.Controllers
             return View();
         }
 
+        [Route("/Admin/SecureBarChart")]
         public IActionResult SearchBarChart()
         {
             // Get the response details from session
@@ -181,6 +183,7 @@ namespace a3_s3736719_s3677615.Controllers
             return View();
         }
 
+        [Route("/Admin/SecureLineChart")]
         public IActionResult SearchLineChart()
         {
             // Get the response details from session
@@ -247,6 +250,7 @@ namespace a3_s3736719_s3677615.Controllers
         }
 
 
+        // a list for customer and account
         private async Task PopulateDropDownListAsync(object selectedCustomer = null, object selectedAccount = null)
         {
             var customerResponse = await BankApi.InitializeClient().GetAsync("api/customers");

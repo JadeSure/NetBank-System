@@ -19,11 +19,10 @@ namespace a3_s3736719_s3677615.Controllers
 {
     // protection
     [AuthorizeCustomer]
+    
     public class AdminUserProfileController : Controller
     {
-
-        // public AdminUserProfileController(NwbaDbContext context) => _context = context;
-
+        [Route("/Admin/SecureUserProfile")]
         public async Task<IActionResult> Index()
         {
             // step1: get request
@@ -45,6 +44,7 @@ namespace a3_s3736719_s3677615.Controllers
 
 
 
+        [Route("/Admin/SecureUserDetails")]
         // GET: MyProfile/Details
         public async Task<IActionResult> Details(int? id)
         {
@@ -68,6 +68,7 @@ namespace a3_s3736719_s3677615.Controllers
         }
 
         ////GET: MyProfile/Edit
+        //[Route("/Admin/SecureUserEdit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +91,7 @@ namespace a3_s3736719_s3677615.Controllers
 
 
         //[Bind(include: "CustomerName, TFN, Address, City, State, PostCode, Phone")]
+        // [HttpPost("/Admin/SecureUserInfo")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CustomerDto customer)
@@ -102,8 +104,6 @@ namespace a3_s3736719_s3677615.Controllers
                 var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
                 var response = BankApi.InitializeClient().PutAsync("api/customers", content).Result;
 
-                
-
                 if (response.IsSuccessStatusCode)
                     return RedirectToAction("Index");
             }
@@ -112,6 +112,7 @@ namespace a3_s3736719_s3677615.Controllers
         }
 
         // GET: Movies/Delete/1
+        [Route("/Admin/SecureUserDelete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

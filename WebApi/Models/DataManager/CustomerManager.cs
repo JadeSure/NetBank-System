@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WebApi.Models.Repository;
 
 namespace WebApi.Models.DataManager
-{
+{// connect to the database directly to manage customers' info
     public class CustomerManager : IDataRepository<CustomerAPI, int>
     {
         private readonly NwbaDbContext _context;
@@ -16,6 +16,7 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
+        // add customer
         public int Add(CustomerAPI item)
         {
             _context.Customers.Add(item);
@@ -23,6 +24,7 @@ namespace WebApi.Models.DataManager
             return item.CustomerID;
         }
 
+        // delete customer based on specific id
         public int Delete(int id)
         {
             _context.Customers.Remove(_context.Customers.Find(id));
@@ -30,16 +32,19 @@ namespace WebApi.Models.DataManager
             return id;
         }
 
+        // get customer based on specific id
         public CustomerAPI Get(int id)
         {
             return _context.Customers.Find(id);
         }
 
+        // obtain all the customers
         public IEnumerable<CustomerAPI> GetAll()
         {
             return _context.Customers.ToList();
         }
 
+        // update customer info for specific id
         public int Update(int id, CustomerAPI item)
         {
             _context.Update(item);
