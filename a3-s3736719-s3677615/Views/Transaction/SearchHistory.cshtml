@@ -1,12 +1,11 @@
 ﻿@model a3_s3736719_s3677615.ViewModels.SearchHistoryViewModel
 
 @{
-    ViewData["Title"] = "Search transaction history";
+    ViewData["Title"] = "Search Transaction History";
 }
 
-<h1>Search transaction history</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>Search</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,15 +20,15 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="AccountNumber" class="control-label"></label>
-                <select asp-for="AccountNumber" class="form-control" asp-items="ViewBag.AccountsList">
+                <label asp-for="TransactionType" class="control-label"></label>
+                <select asp-for="TransactionType" class="form-control" asp-items="Html.GetEnumSelectList<TransactionType>()">
                     <option selected value="">--- SELECT ---</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label asp-for="TransactionType" class="control-label"></label>
-                <select asp-for="TransactionType" class="form-control" asp-items="Html.GetEnumSelectList<TransactionType>()">
+                <label asp-for="AccountNumber" class="control-label"></label>
+                <select asp-for="AccountNumber" class="form-control" asp-items="ViewBag.AccountsList">
                     <option selected value="">--- SELECT ---</option>
                 </select>
             </div>
@@ -38,6 +37,7 @@
                 <label asp-for="MinAmount" class="control-label"></label>
                 <input asp-for="MinAmount" class="form-control" />
                 <span asp-validation-for="MinAmount" class="text-danger"></span>
+                <div>~</div>
                 <input asp-for="MaxAmount" class="form-control" />
                 <span asp-validation-for="MaxAmount" class="text-danger"></span>
 
@@ -45,7 +45,9 @@
 
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" /> ~  <input asp-for="EndTime" class="form-control" />
+                <input asp-for="StartTime" class="form-control" />
+                <div>~</div>
+                <input asp-for="EndTime" class="form-control" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
@@ -57,7 +59,7 @@
 
 
             <div class="form-group">
-                <input type="submit" value="SearchHistory" class="btn btn-primary" />
+                <input type="submit" value="Search" class="btn btn-primary" />
             </div>
         </form>
     </div>

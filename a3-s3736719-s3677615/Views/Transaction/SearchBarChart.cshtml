@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Transactions History";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Chart.css" />
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+    <a asp-action="Index">Search Result</a> |
+    <a asp-action="SearchPieChart">Transaction Analyze</a> |
+    <a asp-action="SearchBarChart">Income Summary</a> |
+    <a asp-action="SearchLineChart">Monthly Track</a>
+
+    <canvas id="transactionChart"></canvas>
+</div>
+
+@section Scripts {
+    <script src="~/js/Chart.js"></script>
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/chartjs-plugin-colorschemes.js"></script>
+    <script>
+        var canvas = document.getElementById("transactionChart").getContext("2d");
+
+        var myChart = new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(ViewBag.ChartGroup),
+                datasets:
+                    [{
+                        label: "Revenue",
+                        data:  @Html.Raw(ViewBag.ChartRevenue),
+                        borderWidth: 3
+                    }, {
+                        label: "Expense",
+                        data: @Html.Raw(ViewBag.ChartExpense),
+                        borderWidth: 3
+
+                    }]
+            },
+            options: {
+                plugins: {
+                    colorschemes: {
+                        scheme: 'brewer.RdPu3'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Income Summary Chart"
+                }
+            }
+        });
+
+    </script>
+}

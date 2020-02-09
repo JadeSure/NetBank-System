@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Transactions History";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Chart.css" />
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+    <a asp-action="Index">Search Result</a> |
+    <a asp-action="SearchPieChart">Transaction Analyze</a> |
+    <a asp-action="SearchBarChart">Income Summary</a> |
+    <a asp-action="SearchLineChart">Monthly Track</a>
+
+    <canvas id="transactionChart"></canvas>
+</div>
+
+@section Scripts {
+    <script src="~/js/Chart.js"></script>
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/chartjs-plugin-colorschemes.js"></script>
+    <script>
+        var canvas = document.getElementById("transactionChart").getContext("2d");
+
+
+        var myChart = new Chart(canvas, {
+            type: 'polarArea',
+                data: {
+                    labels: @Html.Raw(ViewBag.ChartLabel),
+                    datasets: [{
+                        label: 'Amount',
+                        data: @ViewBag.ChartValue,
+                        borderWidth: 3
+                    }]
+            },
+            options: {
+                plugins: {
+                    colorschemes: {
+                        scheme: 'brewer.RdPu5'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Transaction Analyze Chart"
+                }
+            }
+        });
+
+    </script>
+}
