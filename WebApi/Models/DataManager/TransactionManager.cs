@@ -11,9 +11,9 @@ namespace WebApi.Models.DataManager
     public class TransactionRequest
     {
         public int? CustomerID { get; set; }
-        public int? AccountNumber { get; set; }
         public TransactionType? TransactionType { get; set; }
-        public int? DestinationAccountNumber { get; set; }
+        public int? AccountNumber { get; set; }
+        //public int? DestinationAccountNumber { get; set; }
         public decimal? MinAmount { get; set; }
         public decimal? MaxAmount { get; set; }
         public string Comment { get; set; }
@@ -77,12 +77,8 @@ namespace WebApi.Models.DataManager
 
             if (searchRequest.CustomerID != null)
             {
-                result = result.Where(x => x.Account.CustomerID == searchRequest.CustomerID);
-            }
-
-            if (searchRequest.AccountNumber != null)
-            {
-                result = result.Where(x => x.AccountNumber == searchRequest.AccountNumber);
+                result = result.Where(x => x.Account.CustomerID == searchRequest.CustomerID
+                                            || x.DestAccount.CustomerID == searchRequest.CustomerID);
             }
 
             if (searchRequest.TransactionType != null)
@@ -90,9 +86,15 @@ namespace WebApi.Models.DataManager
                 result = result.Where(x => x.TransactionType == searchRequest.TransactionType);
             }
 
-            if (searchRequest.DestinationAccountNumber != null)
+            //if (searchRequest.DestinationAccountNumber != null)
+            //{
+            //    result = result.Where(x => x.DestinationAccountNumber == searchRequest.DestinationAccountNumber);
+            //}
+
+            if (searchRequest.AccountNumber != null)
             {
-                result = result.Where(x => x.DestinationAccountNumber == searchRequest.DestinationAccountNumber);
+                result = result.Where(x => x.AccountNumber == searchRequest.AccountNumber
+                                            || x.DestinationAccountNumber == searchRequest.AccountNumber);
             }
 
             if (searchRequest.MinAmount != null)

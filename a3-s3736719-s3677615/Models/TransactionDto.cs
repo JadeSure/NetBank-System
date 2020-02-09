@@ -16,6 +16,8 @@ namespace a3_s3736719_s3677615.Models
         S = 4,
         [Display(Name = "BillPay")]
         B = 5
+
+
     }
 
     public class TransactionDto
