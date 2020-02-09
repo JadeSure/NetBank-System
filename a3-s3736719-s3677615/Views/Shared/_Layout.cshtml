@@ -28,7 +28,7 @@
                         {
                             <li class="nav-item">
                                 <span class="nav-link text-dark">
-                                    Welcome, Captain @Context.Session.GetString(nameof(AdminLogin.AdminName))
+                                    Welcome, @Context.Session.GetString(nameof(AdminLogin.AdminName))
                                 </span>
                             </li>
                             <li class="nav-item">
@@ -49,7 +49,7 @@
                         {
                             <!--when user login the system, it will appear Transactions, Accounts, Scheduled pay and User Profile-->
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="ATM" asp-action="MakeTransaction">Transactions</a>
+                                <a class="nav-link text-dark" asp-controller="Transaction" asp-action="SearchHistory">Transactions</a>
                             </li>
 
                             <li class="nav-item">

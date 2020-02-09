@@ -28,8 +28,8 @@ namespace a3_s3736719_s3677615
             services.AddSession(options =>
             {
                 // add idle time out in 10 seconds
-                // options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
+                // noptions.IdleTimeout = TimeSpan.FromSeconds(10);
+                // options.Cookie.HttpOnly = true;
                 // Make the session cookie essential.
                 options.Cookie.IsEssential = true;
             });
@@ -48,6 +48,9 @@ namespace a3_s3736719_s3677615
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // when an error happened, the url need to link to status code first.
+            app.UseStatusCodePagesWithReExecute("/Admin/StatusCode/{0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -58,7 +61,7 @@ namespace a3_s3736719_s3677615
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Transaction}/{action=SearchHistory}/{id?}");
+                    pattern: "{controller=AdminLogin}/{action=Login}/{id?}");
             });
         }
     }
