@@ -83,7 +83,8 @@ namespace a3_s3736719_s3677615.Controllers
 
             // step3: Deserializing the response recieved from web api and storing into a list.
             var customer = JsonConvert.DeserializeObject<CustomerDto>(result);
-            
+            PopulateStateDropDownList(customer.State);
+
             return View(customer);
         }
 
@@ -100,6 +101,8 @@ namespace a3_s3736719_s3677615.Controllers
             {
                 var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
                 var response = BankApi.InitializeClient().PutAsync("api/customers", content).Result;
+
+                
 
                 if (response.IsSuccessStatusCode)
                     return RedirectToAction("Index");
@@ -137,6 +140,22 @@ namespace a3_s3736719_s3677615.Controllers
                 return RedirectToAction("Index");
 
             return NotFound();
+        }
+
+        // state select list
+        private void PopulateStateDropDownList(object selectedState = null)
+        {
+
+            var States = Enum.GetValues(typeof(State))
+                .Cast<State>()
+                .Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() })
+                .ToList();
+
+            // value == state.code in int
+            // text == state.string code
+            // value -> text
+            // selectedState == default selected state
+             ViewBag.States = new SelectList(States, "Value", "Text", selectedState);
         }
 
     }

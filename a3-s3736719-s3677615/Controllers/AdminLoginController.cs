@@ -20,7 +20,7 @@ namespace a3_s3736719_s3677615.Controllers
         // default page by get, only in url XX/Login, this method will be call
         [HttpGet]
         // customized routing, hidden real link
-        
+        [Route("/Admin/SecureLogin")]
         //[ActionName("Login")]
         public IActionResult Login() => View();
 
@@ -31,7 +31,7 @@ namespace a3_s3736719_s3677615.Controllers
         {
            
 
-            if (AdminId!="admin" || AdminName!="jin")
+            if (AdminId!="admin" || AdminName!="admin")
             { 
                 ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
 
