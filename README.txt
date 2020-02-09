@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 # WDT Assignment 3
+=======
+# WDT Assignment 2
+>>>>>>> develop_newTransaction_dataseed
 
 ## Team
 s3677615 Shuo Wang
 s3736719 Ming-jin Yeh
 
 ## Info
+<<<<<<< HEAD
+=======
+
+Info
+>>>>>>> develop_newTransaction_dataseed
 This is a web application based on ASP.net core as a prototype for Internet Banking Website in customer layer, which connect to the database in AZure by MVC model. 
 The website is designed by EF and the data annotation and database constriants are satisfied a serious of standard.
 For the function of Admin account, admin has a higher priority to operate customers' account, billpay and see the data analysis in different search filter, which shown in different charts.
