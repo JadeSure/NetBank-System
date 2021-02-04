@@ -1,8 +1,8 @@
-# WDT Assignment 3
+# NetBank System
 
 ## Team
-s3677615 Shuo Wang
-s3736719 Ming-jin Yeh
+Shuo Wang
+Ming-jin Yeh
 
 ## Info
 This is a web application based on ASP.net core as a prototype for Internet Banking Website in customer layer, which connect to the database in AZure by MVC model. 
